@@ -1,7 +1,7 @@
 *{
     margin: 0;
     padding: 0;
-    font-family: sans-serif, 'Poppins';
+    font-family: 'Netflix-Sans', 'Poppins';
     box-sizing: border-box;
 }
 body{
@@ -34,11 +34,13 @@ nav{
 select{
     background: transparent;
     color:#fff;
-    padding: 6px 36px;
+    display: flex;
+    padding: 6px 25px;
     font-size:  1rem; 
     border-radius: 4px;
-    margin-left: 700px;
-    cursor: pointer;}
+    margin-left: 650px;
+    cursor: pointer;
+}
 nav button {
     background-color: rgb(229, 9, 20);
     color: #fff;
@@ -48,6 +50,47 @@ nav button {
     font-weight: 400;
     padding: 6px 20px;
     border-radius: 4px;
+    margin-right: 100px;
+}
+a{
+    text-decoration: none;
+    color: #fff;
+}
+a:visited{
+    color:inherit;
 }
 button:hover
     {opacity:0.9}
+.head-content{
+   position: absolute;
+   font-family: 'Netflix-Sans';
+   top: 30%;
+   left: 50%;
+   transform: translate(-50%,-50%);
+   text-align: center;
+   margin-top: 100px; ;
+}
+.head-content h1{
+        display: block;
+        font-size: 3em;
+        margin-block-start: 0.67em;
+        margin-block-end: 0.67em;
+        margin-inline-start: 0px;
+        margin-inline-end: 0px;
+        font-weight: bold;
+    }
+    .head-content p{
+            display: block;
+            font-size: 1.5em;
+            margin-block-start: 1em;
+            margin-block-end: 1em;
+            margin-inline-start: 0px;
+            margin-inline-end: 0px;
+    
+    }
+
+    .email{
+    padding: 5px;
+    margin: 20px;
+    width: 65%;
+    }
