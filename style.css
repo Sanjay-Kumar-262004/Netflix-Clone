@@ -14,7 +14,7 @@ color: #fff;
     height: 80vh;
     min-height: 30rem;
     padding: 7.5rem 0 2rem;
-     background-image: linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)), url(images/header-image.jpg) ; 
+    background-image: linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)), url(images/header-image.jpg) ; 
     background-size: cover;
     background-position: center;
     padding: 10px 8%;
@@ -45,7 +45,6 @@ nav button {
     background-color: rgb(229, 9, 20);
     color: #fff;
     border: 0;
-    padding: 0.25rem 1rem;
     font-size: 1rem;
     font-weight: 400;
     padding: 6px 20px;
@@ -64,7 +63,7 @@ button:hover
 .head-content{
    position: absolute;
    font-family: 'Netflix-Sans';
-   top: 30%;
+   top: 40%;
    left: 50%;
    transform: translate(-50%,-50%);
    text-align: center;
@@ -73,6 +72,7 @@ button:hover
 .head-content h1{
         display: block;
         font-size: 3em;
+        font-family: Netflix Sans;
         margin-block-start: 0.67em;
         margin-block-end: 0.67em;
         margin-inline-start: 0px;
@@ -86,11 +86,33 @@ button:hover
             margin-block-end: 1em;
             margin-inline-start: 0px;
             margin-inline-end: 0px;
+
     
     }
-
-    .email{
-    padding: 5px;
-    margin: 20px;
-    width: 65%;
+.email{
+    align-items: center;
+    margin-top: 30px;
+    gap: 10px;
     }
+    .email input{
+        width: 350px;
+        font-size: 20px;
+        padding: 15px;
+        background: transparent;
+        color: #fff;
+        border-radius: 4px;
+        border: 1px solid gray;
+        
+        
+    }
+button{
+    background-color: rgb(229, 9, 20);
+    color: #fff;
+    border: 50px;
+    font-size: 20px;
+    font-weight: 800;
+    padding: 15px;
+    border-radius: 4px;
+    
+   
+}
