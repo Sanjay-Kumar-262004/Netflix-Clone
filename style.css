@@ -95,7 +95,7 @@ button:hover
     gap: 10px;
     }
     .email input{
-        width: 350px;
+        width: 550px;
         font-size: 20px;
         padding: 15px;
         background: transparent;
@@ -109,30 +109,9 @@ button{
     border: 100px;
     font-size: 20px;
     font-weight: 800;
-    padding: 15px;
+    padding: 15px 15px;
     border-radius: 4px;
 }
-button span{
-    display: inline-block;
-    position: relative;
-    transition: 0.5s;
-  }
- button span:after {
-    content: '\00bb';
-    position:center;
-    opacity: 0;
-    top: 0;
-    right: -100px;
-    transition: 0.5s;
-  }
-  button:hover span {
-    padding-right: 10px;
-  }
-  
-  button:hover span:after {
-    opacity: 1;
-    right: 0;
-  } 
   .features{
     padding: 50px 12%;
     font-size: 22px;
@@ -170,3 +149,78 @@ button span{
     position: absolute;
     background-color: rgb(35,35,35);
   }
+  .gray-line2{
+    width: 100%;
+    height: 0.7rem;
+    position: absolute;
+    background-color: rgb(35,35,35);
+  }
+  .features h2{
+    font-size: 50px;
+    font-weight: 600;
+    margin-bottom:20px;
+  }
+  .faq{
+  height: 100vh;
+  width: 100%;
+  background-color: #000000;
+}
+.sum{
+  width: 60vw;
+  justify-content: left;
+  margin: auto;
+  padding-top: 5vh;
+  display: flex;
+}
+.sum summary,.sum details{
+  color: white;
+  font-size: 1.5em;
+  font-family: Netflix Sans, Helvetica Neue, Segoe UI, Roboto, Ubuntu,
+    sans-serif;
+    font-weight: 400;
+}
+.faq p:nth-child(1){
+  font-family: Netflix Sans, Helvetica Neue, Segoe UI, Roboto, Ubuntu,
+    sans-serif;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    font-size: 3rem;
+    font-weight: 900;
+    color: white;
+    padding-top: 70px;
+}
+.btm_ml{
+  display: flex;
+  justify-content: center;
+  margin: auto;
+}
+.rdy{
+  font-family: Netflix Sans, Helvetica Neue, Segoe UI, Roboto, Ubuntu,
+    sans-serif;
+    font-size: 1.5rem;
+    color: white;
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+    font-weight: 400;
+}
+.ml{
+  background: black;
+  width: 24vw;
+  height: 8vh;
+  color: white;
+  border-radius: 8px;
+  font-weight: 600;
+  font-family: Netflix Sans, Helvetica Neue, Segoe UI, Roboto, Ubuntu,
+    sans-serif;
+  font-size: 1em;
+  padding-left: 15px;
+}
+.input {
+  justify-content: center;
+  margin: auto;
+  display: inline;
+}
+.input::placeholder {
+  font-size: 1em;
+} 
