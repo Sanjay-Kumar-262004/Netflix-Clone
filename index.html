@@ -1,4 +1,3 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,20 +15,21 @@
 
     <!-- Hero Section -->
     <section class="relative h-screen flex items-center justify-center text-center bg-cover bg-center" style="background-image: url('./images/header-image.jpg');">
-        <div class="bg-black bg-opacity-50 p-6 rounded-lg">
-            <h2 class="text-4xl font-bold mb-4">Unlimited movies, TV shows, and more</h2>
-            <p class="text-lg">Watch anywhere. Cancel anytime.</p>
+        <div class="absolute inset-0 bg-black bg-opacity-70"></div>
+        <div class="relative z-10 p-6 rounded-lg">
+            <h2 class="text-4xl font-bold mb-4 text-white">Unlimited movies, TV shows, and more</h2>
+            <p class="text-lg text-white">Watch anywhere. Cancel anytime.</p>
         </div>
     </section>
 
     <!-- Movie Rows -->
-    <section class="p-6 space-y-8">
+    <section class="p-6 space-y-8 text-center relative">
         <h2 class="text-2xl font-bold">Trending Now</h2>
-        <div class="relative"></div>
+        <div class="relative overflow-hidden">
             <button class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full z-10" onclick="scrollLeft()">
                 &#10094;
             </button>
-            <div class="flex overflow-hidden space-x-4" id="movieRow">
+            <div class="flex overflow-x-scroll space-x-4" id="movieRow">
                 <img src="./images/Vidamuyarchi.jpg" class="w-48 h-72 object-cover rounded-lg hover:scale-105 transition-transform"/>
                 <img src="./images/GBU.jpg" class="w-48 h-72 object-cover rounded-lg hover:scale-105 transition-transform"/>
                 <img src="./images/Kingston.jpg" class="w-48 h-72 object-cover rounded-lg hover:scale-105 transition-transform"/>
