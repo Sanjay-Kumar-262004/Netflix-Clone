@@ -1,3 +1,4 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,66 +6,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Netflix Clone</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        .scroll-container::-webkit-scrollbar {
-            display: none;
-        }
-    </style>
 </head>
 <body class="bg-black text-white">
     <!-- Header -->
     <header class="flex justify-between items-center p-4 bg-black fixed w-full z-50">
         <h1 class="text-3xl font-bold text-red-600">NETFLIX</h1>
-        <button class="bg-red-600 px-4 py-2 rounded-md">Sign In</button>
+        <a href="login.html" class="bg-red-600 px-4 py-2 rounded-md">Sign In</a>
     </header>
 
     <!-- Hero Section -->
-    <section class="relative h-screen flex items-center justify-center text-center bg-cover bg-center" style="background-image: url('https://image.tmdb.org/t/p/original/your_hero_image.jpg');">
-        <div class="bg-black bg-opacity-50 p-6 rounded-lg max-w-2xl">
-            <h2 class="text-5xl font-bold mb-4">Unlimited movies, TV shows, and more</h2>
-            <p class="text-lg mb-4">Watch anywhere. Cancel anytime.</p>
-            <button class="bg-red-600 text-white px-6 py-3 text-xl rounded-md">Get Started</button>
+    <section class="relative h-screen flex items-center justify-center text-center bg-cover bg-center" style="background-image: url('./images/header-image.jpg');">
+        <div class="bg-black bg-opacity-50 p-6 rounded-lg">
+            <h2 class="text-4xl font-bold mb-4">Unlimited movies, TV shows, and more</h2>
+            <p class="text-lg">Watch anywhere. Cancel anytime.</p>
         </div>
     </section>
 
     <!-- Movie Rows -->
     <section class="p-6 space-y-8">
         <h2 class="text-2xl font-bold">Trending Now</h2>
-        <div class="scroll-container flex space-x-4 overflow-x-scroll p-2">
-            <img src="https://via.placeholder.com/200x300" class="rounded-lg hover:scale-105 transition-transform"/>
-            <img src="https://via.placeholder.com/200x300" class="rounded-lg hover:scale-105 transition-transform"/>
-            <img src="https://via.placeholder.com/200x300" class="rounded-lg hover:scale-105 transition-transform"/>
-            <img src="https://via.placeholder.com/200x300" class="rounded-lg hover:scale-105 transition-transform"/>
-            <img src="https://via.placeholder.com/200x300" class="rounded-lg hover:scale-105 transition-transform"/>
-            <img src="https://via.placeholder.com/200x300" class="rounded-lg hover:scale-105 transition-transform"/>
-            <img src="https://via.placeholder.com/200x300" class="rounded-lg hover:scale-105 transition-transform"/>
-            <img src="https://via.placeholder.com/200x300" class="rounded-lg hover:scale-105 transition-transform"/>
-            <img src="https://via.placeholder.com/200x300" class="rounded-lg hover:scale-105 transition-transform"/>
-        </div>
-    </section>
-
-    <section class="p-6 space-y-8">
-        <h2 class="text-2xl font-bold">Top Picks for You</h2>
-        <div class="scroll-container flex space-x-4 overflow-x-scroll p-2">
-            <img src="https://via.placeholder.com/200x300" class="rounded-lg hover:scale-105 transition-transform"/>
-            <img src="https://via.placeholder.com/200x300" class="rounded-lg hover:scale-105 transition-transform"/>
-            <img src="https://via.placeholder.com/200x300" class="rounded-lg hover:scale-105 transition-transform"/>
-            <img src="https://via.placeholder.com/200x300" class="rounded-lg hover:scale-105 transition-transform"/>
-            <img src="https://via.placeholder.com/200x300" class="rounded-lg hover:scale-105 transition-transform"/>
-            <img src="https://via.placeholder.com/200x300" class="rounded-lg hover:scale-105 transition-transform"/>
+        <div class="relative"></div>
+            <button class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full z-10" onclick="scrollLeft()">
+                &#10094;
+            </button>
+            <div class="flex overflow-hidden space-x-4" id="movieRow">
+                <img src="./images/Vidamuyarchi.jpg" class="w-48 h-72 object-cover rounded-lg hover:scale-105 transition-transform"/>
+                <img src="./images/GBU.jpg" class="w-48 h-72 object-cover rounded-lg hover:scale-105 transition-transform"/>
+                <img src="./images/Kingston.jpg" class="w-48 h-72 object-cover rounded-lg hover:scale-105 transition-transform"/>
+                <img src="./images/Thug Life.jpg" class="w-48 h-72 object-cover rounded-lg hover:scale-105 transition-transform"/>
+                <img src="./images/Retro.jpeg" class="w-48 h-72 object-cover rounded-lg hover:scale-105 transition-transform"/>
+                <img src="./images/VDS.jpg" class="w-48 h-72 object-cover rounded-lg hover:scale-105 transition-transform"/>
+                <img src="./images/DN.jpg" class="w-48 h-72 object-cover rounded-lg hover:scale-105 transition-transform"/>
+            </div>
+            <button class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full z-10" onclick="scrollRight()">
+                &#10095;
+            </button>
         </div>
     </section>
 
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const scrollContainers = document.querySelectorAll(".scroll-container");
-            scrollContainers.forEach(container => {
-                container.addEventListener("wheel", (evt) => {
-                    evt.preventDefault();
-                    container.scrollLeft += evt.deltaY;
-                });
-            });
-        });
+        function scrollLeft() {
+            document.getElementById('movieRow').scrollBy({ left: -200, behavior: 'smooth' });
+        }
+
+        function scrollRight() {
+            document.getElementById('movieRow').scrollBy({ left: 200, behavior: 'smooth' });
+        }
     </script>
 </body>
 </html>
