@@ -3,55 +3,248 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Netflix Clone</title>
+    <title>Netflix Clone by Sanjay_Kumar_S26</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles */
+        body {
+            background-color: black;
+            color: white;
+        }
+
+        /* Movie row styling */
+        .movie-container {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .movie-card {
+            position: relative;
+            width: 25%;
+            padding: 10px;
+            overflow: hidden;
+        }
+
+        .movie-card img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 8px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        /* Hover effect */
+        .movie-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .movie-card .overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 18px;
+            border-radius: 8px;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .movie-card:hover .overlay {
+            opacity: 1;
+        }
+
+        /* Slider buttons */
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            font-size: 24px;
+            cursor: pointer;
+            border-radius: 50%;
+            z-index: 10;
+        }
+
+        .left-btn { left: 10px; }
+        .right-btn { right: 10px; }
+
+    </style>
 </head>
-<body class="bg-black text-white">
+<body>
+
     <!-- Header -->
     <header class="flex justify-between items-center p-4 bg-black fixed w-full z-50">
         <h1 class="text-3xl font-bold text-red-600">NETFLIX</h1>
-        <a href="login.html" class="bg-red-600 px-4 py-2 rounded-md">Sign In</a>
+        <div class="flex items-center space-x-4">
+            <select id="languageSelect" class="bg-black text-white border border-gray-600 rounded-md p-2">
+                <option value="en">English</option>
+                <option value="ta">Tamil</option>
+                <option value="hi">Hindi</option>
+            </select>
+            <a href="login.html" class="bg-red-600 px-4 py-2 rounded-md">Sign In</a>
+        </div>
     </header>
 
     <!-- Hero Section -->
-    <section class="relative h-screen flex items-center justify-center text-center bg-cover bg-center" style="background-image: url('./images/header-image.jpg');">
+    <section class="relative h-screen flex items-center justify-center text-center bg-cover bg-center" 
+        style="background-image: url('./images/header-image.jpg');">
         <div class="absolute inset-0 bg-black bg-opacity-70"></div>
         <div class="relative z-10 p-6 rounded-lg">
-            <h2 class="text-4xl font-bold mb-4 text-white">Unlimited movies, TV shows, and more</h2>
-            <p class="text-lg text-white">Watch anywhere. Cancel anytime.</p>
+            <h2 class="text-4xl font-bold mb-4">Unlimited movies, TV shows, and more</h2>
+            <p class="text-lg">Watch anywhere. Cancel anytime.</p>
         </div>
     </section>
 
     <!-- Movie Rows -->
-    <section class="p-6 space-y-8 text-center relative">
+    <section class="p-6 text-center relative">
         <h2 class="text-2xl font-bold">Trending Now</h2>
-        <div class="relative overflow-hidden">
-            <button class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full z-10" onclick="scrollLeft()">
-                &#10094;
-            </button>
-            <div class="flex overflow-x-scroll space-x-4" id="movieRow">
-                <img src="./images/Vidamuyarchi.jpg" class="w-48 h-72 object-cover rounded-lg hover:scale-105 transition-transform"/>
-                <img src="./images/GBU.jpg" class="w-48 h-72 object-cover rounded-lg hover:scale-105 transition-transform"/>
-                <img src="./images/Kingston.jpg" class="w-48 h-72 object-cover rounded-lg hover:scale-105 transition-transform"/>
-                <img src="./images/Thug Life.jpg" class="w-48 h-72 object-cover rounded-lg hover:scale-105 transition-transform"/>
-                <img src="./images/Retro.jpeg" class="w-48 h-72 object-cover rounded-lg hover:scale-105 transition-transform"/>
-                <img src="./images/VDS.jpg" class="w-48 h-72 object-cover rounded-lg hover:scale-105 transition-transform"/>
-                <img src="./images/DN.jpg" class="w-48 h-72 object-cover rounded-lg hover:scale-105 transition-transform"/>
+        <div class="relative w-full flex justify-center">
+            <button class="slider-btn left-btn" onclick="scrollLeft()">&#10094;</button>
+            <div class="w-[80%] overflow-hidden">
+                <div class="movie-container" id="movieRow">
+                    <div class="movie-card">
+                        <img src="./images/Vidamuyarchi.jpg" alt="Vidamuyarchi">
+                        <div class="overlay">Vidamuyarchi</div>
+                    </div>
+                    <div class="movie-card">
+                        <img src="./images/GBU.jpg" alt="GBU">
+                        <div class="overlay">GBU</div>
+                    </div>
+                    <div class="movie-card">
+                        <img src="./images/Kingston.jpg" alt="Kingston">
+                        <div class="overlay">Kingston</div>
+                    </div>
+                    <div class="movie-card">
+                        <img src="./images/Thug Life.jpg" alt="Thug Life">
+                        <div class="overlay">Thug Life</div>
+                    </div>
+                    <div class="movie-card">
+                        <img src="./images/Retro.jpeg" alt="Retro">
+                        <div class="overlay">Retro</div>
+                    </div>
+                    <div class="movie-card">
+                        <img src="./images/VDS.jpg" alt="VDS">
+                        <div class="overlay">Veera Dheera Sooran Part 2</div>
+                    </div>
+                    <div class="movie-card">
+                        <img src="./images/DN.jpg" alt="DN">
+                        <div class="overlay">Dhuruva Natcathiram</div>
+                    </div>
+                    <div class="movie-card">
+                        <img src="./images/coolie.jpg" alt="Coolie">
+                        <div class="overlay">Coolie</div>
+                    </div>
+                    <div class="movie-card">
+                        <img src="./images/Yezhu_Kadal_Yezhu_Malai.jpg" alt="Yezhu Kadal Yezhu Malai">
+                        <div class="overlay">Yezhu Kadal Yezhu Malai</div>
+                    </div>
+                </div>
             </div>
-            <button class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full z-10" onclick="scrollRight()">
-                &#10095;
-            </button>
+            <button class="slider-btn right-btn" onclick="scrollRight()">&#10095;</button>
         </div>
     </section>
 
+    <!-- Series Rows -->
+    <section class="p-6 text-center relative">
+        <h2 class="text-2xl font-bold">Trending Series</h2>
+        <div class="relative w-full flex justify-center">
+            <button class="slider-btn left-btn" onclick="scrollLeft()">&#10094;</button>
+            <div class="w-[80%] overflow-hidden">
+                <div class="movie-container" id="seriesRow">
+                    <div class="movie-card">
+                        <img src="./images/The Greatest Heist.jpg" alt="Series 1">
+                        <div class="overlay">The Great Heist S-1</div>
+                    </div>
+                    <div class="movie-card">
+                        <img src="./images/series2.jpg" alt="Series 2">
+                        <div class="overlay">Series 2</div>
+                    </div>
+                    <div class="movie-card">
+                        <img src="./images/series3.jpg" alt="Series 3">
+                        <div class="overlay">Series 3</div>
+                    </div>
+                    <div class="movie-card">
+                        <img src="./images/series4.jpg" alt="Series 4">
+                        <div class="overlay">Series 4</div>
+                    </div>
+                    <div class="movie-card">
+                        <img src="./images/series5.jpg" alt="Series 5">
+                        <div class="overlay">Series 5</div>
+                    </div>
+                    <div class="movie-card">
+                        <img src="./images/series6.jpg" alt="Series 6">
+                        <div class="overlay">Series 6</div>
+                    </div>
+                    <div class="movie-card">
+                        <img src="./images/series7.jpg" alt="Series 7">
+                        <div class="overlay">Series 7</div>
+                    </div>
+                    <div class="movie-card">
+                        <img src="./images/series8.jpg" alt="Series 8">
+                        <div class="overlay">Series 8</div>
+                    </div>
+                    <div class="movie-card">
+                        <img src="./images/series9.jpg" alt="Series 9">
+                        <div class="overlay">Series 9</div>
+                    </div>
+                </div>
+            </div>
+            <button class="slider-btn right-btn" onclick="scrollRight()">&#10095;</button>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer class="bg-black text-white p-6 mt-6">
+        <p class="text-center">Questions? Call 000-800-919-1694</p>
+        <div class="footer-links flex flex-wrap justify-center space-x-4 mt-4">
+            <a href="#" class="hover:underline">FAQ</a>
+            <a href="#" class="hover:underline">Help Center</a>
+            <a href="#" class="hover:underline">Account</a>
+            <a href="#" class="hover:underline">Investor Relations</a>
+            <a href="#" class="hover:underline">Jobs</a>
+            <a href="#" class="hover:underline">Privacy</a>
+            <a href="#" class="hover:underline">Terms of Use</a>
+            <a href="#" class="hover:underline">Contact Us</a>
+        </div>
+        <p class="text-center mt-4 text-gray-500">&copy; 2025 Sanjay_Kumar_S26</p>
+    </footer>
     <script>
+        let currentIndex = 0;
+        const moviesPerPage = 4;
+        const movieRow = document.getElementById('movieRow');
+        const totalMovies = document.querySelectorAll('.movie-card').length;
+        const maxIndex = Math.ceil(totalMovies / moviesPerPage) - 1;
+
+        function updateSlider() {
+            const offset = -currentIndex * 100;
+            movieRow.style.transform = `translateX(${offset}%)`;
+        }
+
         function scrollLeft() {
-            document.getElementById('movieRow').scrollBy({ left: -200, behavior: 'smooth' });
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateSlider();
+            }
         }
 
         function scrollRight() {
-            document.getElementById('movieRow').scrollBy({ left: 200, behavior: 'smooth' });
+            if (currentIndex < maxIndex) {
+                currentIndex++;
+                updateSlider();
+            }
         }
+
+        document.getElementById('languageSelect').addEventListener('change', function() {
+            alert('Language changed to: ' + this.value);
+        });
+
     </script>
+
 </body>
 </html>
