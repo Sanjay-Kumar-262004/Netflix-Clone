@@ -16,18 +16,20 @@
         .movie-container {
             display: flex;
             transition: transform 0.5s ease-in-out;
+            width: max-content;
         }
 
         .movie-card {
             position: relative;
-            width: 25%;
+            width: 20vw; /* Dynamic width for responsiveness */
+            min-width: 140px; /* Prevents shrinking too much on small screens */
             padding: 10px;
             overflow: hidden;
         }
 
         .movie-card img {
             width: 100%;
-            height: 300px;
+            height: 250px;
             object-fit: cover;
             border-radius: 8px;
             transition: transform 0.3s ease-in-out;
@@ -75,6 +77,23 @@
         .left-btn { left: 10px; }
         .right-btn { right: 10px; }
 
+        /* Mobile Adjustments */
+        @media (max-width: 768px) {
+            .movie-card {
+                width: 45vw; /* Show 2 cards at a time */
+                min-width: 120px;
+            }
+
+            .movie-card img {
+                height: 180px;
+            }
+
+            .slider-btn {
+                font-size: 18px;
+                padding: 8px;
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -106,52 +125,22 @@
     <section class="p-6 text-center relative">
         <h2 class="text-2xl font-bold">Trending Movies</h2>
         <div class="relative w-full flex justify-center">
-            <button class="slider-btn left-btn" onclick="scrollLeft()">&#10094;</button>
+            <button class="slider-btn left-btn" onclick="scrollLeft('movieRow')">&#10094;</button>
             <div class="w-[80%] overflow-hidden">
                 <div class="movie-container" id="movieRow">
-                    <div class="movie-card">
-                        <img src="./images/Vidamuyarchi.jpg" alt="Vidamuyarchi">
-                        <div class="overlay">Vidamuyarchi</div>
-                    </div>
-                    <div class="movie-card">
-                        <img src="./images/GBU.jpg" alt="GBU">
-                        <div class="overlay">GBU</div>
-                    </div>
-                    <div class="movie-card">
-                        <img src="./images/Kingston.jpg" alt="Kingston">
-                        <div class="overlay">Kingston</div>
-                    </div>
-                    <div class="movie-card">
-                        <img src="./images/Thug Life.jpg" alt="Thug Life">
-                        <div class="overlay">Thug Life</div>
-                    </div>
-                    <div class="movie-card">
-                        <img src="./images/Retro.jpeg" alt="Retro">
-                        <div class="overlay">Retro</div>
-                    </div>
-                    <div class="movie-card">
-                        <img src="./images/VDS.jpg" alt="VDS">
-                        <div class="overlay">Veera Dheera Sooran Part 2</div>
-                    </div>
-                    <div class="movie-card">
-                        <img src="./images/DN.jpg" alt="DN">
-                        <div class="overlay">Dhuruva Natcathiram</div>
-                    </div>
-                    <div class="movie-card">
-                        <img src="./images/coolie.jpg" alt="Coolie">
-                        <div class="overlay">Coolie</div>
-                    </div>
-                    <div class="movie-card">
-                        <img src="./images/Idli Kadai.jpg" alt="Yezhu Kadal Yezhu Malai">
-                        <div class="overlay">Idli Kadai</div>
-                    </div>
-                    <div class="movie-card">
-                        <img src="./images/Yezhu_Kadal_Yezhu_Malai.jpg" alt="Yezhu Kadal Yezhu Malai">
-                        <div class="overlay">Yezhu Kadal Yezhu Malai</div>
-                    </div>
+                    <div class="movie-card"><img src="./images/Vidamuyarchi.jpg" alt="Vidamuyarchi"><div class="overlay">Vidamuyarchi</div></div>
+                    <div class="movie-card"><img src="./images/GBU.jpg" alt="GBU"><div class="overlay">GBU</div></div>
+                    <div class="movie-card"><img src="./images/Kingston.jpg" alt="Kingston"><div class="overlay">Kingston</div></div>
+                    <div class="movie-card"><img src="./images/Thug Life.jpg" alt="Thug Life"><div class="overlay">Thug Life</div></div>
+                    <div class="movie-card"><img src="./images/Retro.jpeg" alt="Retro"><div class="overlay">Retro</div></div>
+                    <div class="movie-card"><img src="./images/VDS.jpg" alt="VDS"><div class="overlay">Veera Dheera Sooran Part 2</div></div>
+                    <div class="movie-card"><img src="./images/DN.jpg" alt="DN"><div class="overlay">Dhuruva Natcathiram</div></div>
+                    <div class="movie-card"><img src="./images/coolie.jpg" alt="Coolie"><div class="overlay">Coolie</div></div>
+                    <div class="movie-card"><img src="./images/Idli Kadai.jpg" alt="Idli Kadai"><div class="overlay">Idli Kadai</div></div>
+                    <div class="movie-card"><img src="./images/Yezhu_Kadal_Yezhu_Malai.jpg" alt="Yezhu Kadal Yezhu Malai"><div class="overlay">Yezhu Kadal Yezhu Malai</div></div>
                 </div>
             </div>
-            <button class="slider-btn right-btn" onclick="scrollRight()">&#10095;</button>
+            <button class="slider-btn right-btn" onclick="scrollRight('movieRow')">&#10095;</button>
         </div>
     </section>
 
@@ -159,7 +148,7 @@
     <section class="p-6 text-center relative">
         <h2 class="text-2xl font-bold">Trending Series</h2>
         <div class="relative w-full flex justify-center">
-            <button class="slider-btn left-btn" onclick="scrollLeft()">&#10094;</button>
+            <button class="slider-btn left-btn" onclick="scrollLeft('seriesRow')">&#10094;</button>
             <div class="w-[80%] overflow-hidden">
                 <div class="movie-container" id="seriesRow">
                     <div class="movie-card">
@@ -204,54 +193,56 @@
                     </div>
                 </div>
             </div>
-            <button class="slider-btn right-btn" onclick="scrollRight()">&#10095;</button>
+            <button class="slider-btn right-btn" onclick="scrollRight('seriesRow')">&#10095;</button>
         </div>
     </section>
-    <!-- Footer -->
-    <footer class="bg-black text-white p-6 mt-6">
-        <p class="text-center">Questions? Call 000-800-919-1694</p>
-        <div class="footer-links flex flex-wrap justify-center space-x-4 mt-4">
-            <a href="#" class="hover:underline">FAQ</a>
-            <a href="#" class="hover:underline">Help Center</a>
-            <a href="#" class="hover:underline">Account</a>
-            <a href="#" class="hover:underline">Investor Relations</a>
-            <a href="#" class="hover:underline">Jobs</a>
-            <a href="#" class="hover:underline">Privacy</a>
-            <a href="#" class="hover:underline">Terms of Use</a>
-            <a href="#" class="hover:underline">Contact Us</a>
-        </div>
-        <p class="text-center mt-4 text-gray-500">&copy; 2025 Sanjay_Kumar_S26</p>
-    </footer>
+
+   <!-- Footer -->
+   <footer class="bg-black text-white p-6 mt-6">
+    <p class="text-center">Questions? Call 000-800-919-1694</p>
+    <div class="footer-links flex flex-wrap justify-center space-x-4 mt-4">
+        <a href="#" class="hover:underline">FAQ</a>
+        <a href="#" class="hover:underline">Help Center</a>
+        <a href="#" class="hover:underline">Account</a>
+        <a href="#" class="hover:underline">Investor Relations</a>
+        <a href="#" class="hover:underline">Jobs</a>
+        <a href="#" class="hover:underline">Privacy</a>
+        <a href="#" class="hover:underline">Terms of Use</a>
+        <a href="#" class="hover:underline">Contact Us</a>
+    </div>
+    <p class="text-center mt-4 text-gray-500">&copy; 2025 Sanjay_Kumar_S26</p>
+</footer>
+
     <script>
         let currentIndex = 0;
-        const moviesPerPage = 4;
         const movieRow = document.getElementById('movieRow');
-        const totalMovies = document.querySelectorAll('.movie-card').length;
-        const maxIndex = Math.ceil(totalMovies / moviesPerPage) - 1;
+        const movieCards = document.querySelectorAll('.movie-card');
+        const totalMovies = movieCards.length;
 
         function updateSlider() {
-            const offset = -currentIndex * 100;
-            movieRow.style.transform = `translateX(${offset}%)`;
+            const cardWidth = movieCards[0].offsetWidth;
+            movieRow.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
         }
 
         function scrollLeft() {
-            if (currentIndex > 0) {
+            if (currentIndex === 0) {
+                currentIndex = totalMovies - 4; // Jump to the end
+            } else {
                 currentIndex--;
-                updateSlider();
             }
+            updateSlider();
         }
 
         function scrollRight() {
-            if (currentIndex < maxIndex) {
+            if (currentIndex >= totalMovies - 4) {
+                currentIndex = 0; // Loop back to the start
+            } else {
                 currentIndex++;
-                updateSlider();
             }
+            updateSlider();
         }
 
-        document.getElementById('languageSelect').addEventListener('change', function() {
-            alert('Language changed to: ' + this.value);
-        });
-
+        window.addEventListener("resize", updateSlider);
     </script>
 
 </body>
