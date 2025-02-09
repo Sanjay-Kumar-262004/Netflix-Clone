@@ -6,9 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Netflix Login</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .background-image {
+            background-image: url('./images/header-image.jpg');
+            background-size: cover;
+            background-position: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.2; /* Dim effect */
+        }
+    </style>
 </head>
-<body class="bg-black flex items-center justify-center min-h-screen text-white">
-    <div class="bg-gray-900 p-8 rounded-lg w-96 shadow-lg">
+<body class="bg-black flex items-center justify-center min-h-screen text-white relative">
+    <div class="background-image"></div>
+    <div class="bg-gray-900 p-8 rounded-lg w-96 shadow-lg z-10">
         <h2 class="text-3xl font-bold mb-6">Sign In</h2>
         <form>
             <input type="email" placeholder="Email" class="w-full p-3 mb-4 bg-gray-800 rounded-md">

@@ -99,7 +99,7 @@
 <body>
 
     <!-- Header -->
-    <header class="flex justify-between items-center p-4 bg-black fixed w-full z-50">
+    <header class="flex justify-between items-center p-4 fixed w-full z-50 bg-black bg-opacity-50">
         <h1 class="text-3xl font-bold text-red-600">NETFLIX</h1>
         <div class="flex items-center space-x-4">
             <select id="languageSelect" class="bg-black text-white border border-gray-600 rounded-md p-2">
@@ -214,35 +214,58 @@
 </footer>
 
     <script>
-        let currentIndex = 0;
-        const movieRow = document.getElementById('movieRow');
-        const movieCards = document.querySelectorAll('.movie-card');
-        const totalMovies = movieCards.length;
+        function createSlider(rowId) {
+            let currentIndex = 0;
+            const row = document.getElementById(rowId);
+            const cards = row.querySelectorAll('.movie-card');
+            const totalCards = cards.length;
 
-        function updateSlider() {
-            const cardWidth = movieCards[0].offsetWidth;
-            movieRow.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
-        }
-
-        function scrollLeft() {
-            if (currentIndex === 0) {
-                currentIndex = totalMovies - 4; // Jump to the end
-            } else {
-                currentIndex--;
+            function updateSlider() {
+                const cardWidth = cards[0].offsetWidth;
+                row.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
             }
-            updateSlider();
-        }
 
-        function scrollRight() {
-            if (currentIndex >= totalMovies - 4) {
-                currentIndex = 0; // Loop back to the start
-            } else {
-                currentIndex++;
+            function scrollLeft() {
+                if (currentIndex === 0) {
+                    currentIndex = totalCards - 4; // Jump to the end
+                } else {
+                    currentIndex--;
+                }
+                updateSlider();
             }
-            updateSlider();
+
+            function scrollRight() {
+                if (currentIndex >= totalCards - 4) {
+                    currentIndex = 0; // Loop back to the start
+                } else {
+                    currentIndex++;
+                }
+                updateSlider();
+            }
+
+            window.addEventListener("resize", updateSlider);
+
+            return { scrollLeft, scrollRight };
         }
 
-        window.addEventListener("resize", updateSlider);
+        const movieSlider = createSlider('movieRow');
+        const seriesSlider = createSlider('seriesRow');
+
+        function scrollLeft(rowId) {
+            if (rowId === 'movieRow') {
+                movieSlider.scrollLeft();
+            } else if (rowId === 'seriesRow') {
+                seriesSlider.scrollLeft();
+            }
+        }
+
+        function scrollRight(rowId) {
+            if (rowId === 'movieRow') {
+                movieSlider.scrollRight();
+            } else if (rowId === 'seriesRow') {
+                seriesSlider.scrollRight();
+            }
+        }
     </script>
 
 </body>
