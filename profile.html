@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Who's Watching?</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+        }
+
+        .profile-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .profile-card {
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .profile-card:hover {
+            transform: scale(1.1);
+        }
+
+        .profile-card img {
+            width: 120px;
+            height: 120px;
+            border-radius: 8px;
+        }
+
+        .btn {
+            background-color: red;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background-color: darkred;
+        }
+    </style>
+</head>
+<body class="flex flex-col justify-center items-center h-screen text-center">
+    <h1 class="text-3xl font-bold mb-6">Who's Watching?</h1>
+    <div class="profile-container">
+        <div class="profile-card" onclick="selectProfile('User1')">
+            <img src="./images/man.png" alt="Profile 1">
+            <p>User 1</p>
+        </div>
+        <div class="profile-card" onclick="selectProfile('User2')">
+            <img src="./images/women.png" alt="Profile 2">
+            <p>User 2</p>
+        </div>
+        <div class="profile-card" onclick="selectProfile('User3')">
+            <img src="./images/parents.png" alt="Profile 3">
+            <p>User 3</p>
+        </div>
+        <div class="profile-card" onclick="selectProfile('Kids')">
+            <img src="./images/kid.png" alt="Kids">
+            <p>Kids</p>
+        </div>
+    </div>
+
+    <script>
+        function selectProfile(profile) {
+            localStorage.setItem("selectedProfile", profile);
+            window.location.href = "index.html";
+        }
+    </script>
+</body>
+</html>
