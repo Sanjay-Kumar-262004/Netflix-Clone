@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netflix Clone</title>
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #141414;
+            color: #fff;
+        }
+
+        /* Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #141414;
+        }
+
+        .navbar .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #e50914;
+        }
+
+        .navbar .nav-links {
+            display: flex;
+            gap: 15px;
+            list-style: none;
+        }
+
+        .navbar .nav-links li {
+            cursor: pointer;
+            font-size: 14px;
+            padding: 5px 10px;
+            transition: color 0.3s;
+        }
+
+        .navbar .nav-links li:hover {
+            color: #f40612;
+        }
+
+        .navbar .profile img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+        }
+
+        /* Section Styling */
+        .section {
+            display: none;
+            margin: 20px auto;
+            max-width: 80%;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        .section h2 {
+            margin-bottom: 10px;
+        }
+
+        .card-container {
+            display: flex;
+            justify-content: space-between;
+            overflow-x: auto;
+            gap: 15px;
+            padding-bottom: 10px;
+        }
+
+        .card {
+            position: relative;
+            min-width: 150px;
+            background-color: #333;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: scale(1.1);
+        }
+
+        .card img {
+            width: 100%;
+            height: auto;
+        }
+
+        .card .overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            text-align: center;
+            padding: 5px;
+            font-size: 14px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar .nav-links {
+                display: none;
+            }
+
+            .navbar {
+                justify-content: space-between;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">NETFLIX</div>
+        <ul class="nav-links">
+            <li data-section="trending">Home</li>
+            <li data-section="series">Series</li>
+            <li data-section="movies">Movies</li>
+            <li data-section="originals">Originals</li>
+            <li data-section="recently-added">Recently Added</li>
+            <li data-section="my-list">My List</li>
+        </ul>
+        <div class="profile">
+            <img src="https://via.placeholder.com/30" alt="Profile" />
+        </div>
+    </nav>
+
+    <!-- Sections -->
+    <section class="section active" id="trending">
+        <h2>Trending Now</h2>
+        <div class="card-container">
+            <div class="card">
+                <img src="./images/Breaking Bad.jpg" alt="Poster 1">
+                <div class="overlay">Breaking Bad</div>
+            </div>
+            <div class="card">
+                <img src="./images/coolie.jpg" alt="Poster 2">
+                <div class="overlay">Coolie</div>
+            </div>
+            <div class="card">
+                <img src="./images/coolie.jpg" alt="Poster 3">
+                <div class="overlay">Coolie</div>
+            </div>
+            <div class="card">
+                <img src="./images/coolie.jpg" alt="Poster 4">
+                <div class="overlay">Coolie</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="series">
+        <h2>Watch It Again</h2>
+        <div class="card-container">
+            <div class="card">
+                <img src="./images/Breaking Bad.jpg" alt="Poster 5">
+                <div class="overlay">Breaking Bad</div>
+            </div>
+            <div class="card">
+                <img src="./images/coolie.jpg" alt="Poster 6">
+                <div class="overlay">Coolie</div>
+            </div>
+            <div class="card">
+                <img src="./images/coolie.jpg" alt="Poster 7">
+                <div class="overlay">Coolie</div>
+            </div>
+            <div class="card">
+                <img src="./images/coolie.jpg" alt="Poster 8">
+                <div class="overlay">Coolie</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="movies">
+        <h2>Popular on Netflix</h2>
+        <div class="card-container">
+            <div class="card">
+                <img src="./images/Breaking Bad.jpg" alt="Poster 9">
+                <div class="overlay">Breaking Bad</div>
+            </div>
+            <div class="card">
+                <img src="./images/DN.jpg" alt="Poster 10">
+                <div class="overlay">Death Note</div>
+            </div>
+            <div class="card">
+                <img src="./images/Idli Kadai.jpg" alt="Poster 11">
+                <div class="overlay">Idli Kadai</div>
+            </div>
+            <div class="card">
+                <img src="./images/coolie.jpg" alt="Poster 12">
+                <div class="overlay">Coolie</div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.querySelectorAll('.nav-links li').forEach(item => {
+            item.addEventListener('click', () => {
+                document.querySelectorAll('.section').forEach(section => {
+                    section.classList.remove('active');
+                });
+                document.getElementById(item.getAttribute('data-section')).classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
