@@ -137,6 +137,20 @@
             padding: 8px;
             font-size: 14px;
             font-weight: bold;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+        .card:hover .overlay {
+            opacity: 1;
+        }
+
+        .card:hover img {
+            opacity: 1;
         }
 
         /* Add & Remove Button */
@@ -146,34 +160,41 @@
             right: 10px;
             background: rgba(0, 0, 0, 0.7);
             color: #fff;
-            padding: 5px 10px;
-            border-radius: 20px;
+            padding: 5px;
+            border-radius: 50%;
             cursor: pointer;
-            opacity: 0;
-            transition: opacity 0.3s ease-in-out;
-        }
-
-        .card:hover .add-to-list, .card:hover .remove-from-list {
-            opacity: 1;
+            transition: all 0.3s ease-in-out;
+            font-size: 12px;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
         }
 
         .card .add-to-list::after, .card .remove-from-list::after {
             content: ' Add to List';
             opacity: 0;
             transition: opacity 0.5s ease-in-out;
-        }
-
-        .card:hover .add-to-list::after {
-            opacity: 1;
+            white-space: nowrap;
+            margin-left: 5px;
         }
 
         .card .remove-from-list::after {
             content: ' Remove from List';
             opacity: 0;
             transition: opacity 0.5s ease-in-out;
+            white-space: nowrap;
+            margin-left: 5px;
         }
 
-        .card:hover .remove-from-list::after {
+        .card .add-to-list:hover, .card .remove-from-list:hover {
+            padding: 5px 10px;
+            border-radius: 20px;
+            width: auto;
+            height: auto;
+        }
+
+        .card .add-to-list:hover::after, .card .remove-from-list:hover::after {
             opacity: 1;
         }
 
@@ -209,7 +230,9 @@
             <li data-section="my-list">My List</li>
         </ul>
         <div class="profile">
-            <img src="./images/man.png" alt="Profile" />
+            <a href="./profile.html">
+                <img src="./images/man.png" alt="Profile" />
+            </a>
             <div class="profile-dropdown">
                 <p>Username: User123</p>
                 <p>Email: user@example.com</p>
@@ -225,7 +248,7 @@
         <h2>Trending Now</h2>
         <div class="card-container">
             <div class="card">
-                <img src="./images/movie1.jpg" alt="Movie 1">
+                <img src="./images/DN.jpg" alt="Movie 1">
                 <div class="overlay">Movie 1</div>
                 <div class="add-to-list">+</div>
             </div>
@@ -259,17 +282,18 @@
         document.querySelectorAll('.add-to-list').forEach(button => {
             button.addEventListener('click', (event) => {
                 const card = event.target.closest('.card').cloneNode(true);
+                const movieName = card.querySelector('.overlay').textContent;
                 card.querySelector('.add-to-list').remove();
                 const removeBtn = document.createElement('div');
                 removeBtn.classList.add('remove-from-list');
                 removeBtn.textContent = "-";
                 removeBtn.onclick = () => {
                     card.remove();
-                    showNotification("Removed from My List");
+                    showNotification(`Removed "${movieName}" from My List`);
                 };
                 card.appendChild(removeBtn);
                 document.getElementById('my-list').querySelector('.card-container').appendChild(card);
-                showNotification("Added to My List");
+                showNotification(`Added "${movieName}" to My List`);
             });
         });
     </script>
