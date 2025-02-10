@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Netflix Clone</title>
+    <link rel="icon" href="./images/netflix.png" type="image/png">
+    <title>Netflix Clone by Sanjay_Kumar_S26 - Content Page</title>
     <style>
         /* Global Styles */
         * {
@@ -16,6 +17,7 @@
             font-family: Arial, sans-serif;
             background-color: #141414;
             color: #fff;
+            overflow-x: hidden;
         }
 
         /* Navbar */
@@ -50,17 +52,11 @@
             color: #f40612;
         }
 
-        .navbar .profile img {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-        }
-
         /* Section Styling */
         .section {
             display: none;
             margin: 20px auto;
-            max-width: 80%;
+            max-width: 90%;
         }
 
         .section.active {
@@ -69,32 +65,37 @@
 
         .section h2 {
             margin-bottom: 10px;
+            font-size: 22px;
         }
 
+        /* Movie Card Styling */
         .card-container {
             display: flex;
-            justify-content: space-between;
-            overflow-x: auto;
+            flex-wrap: wrap;
             gap: 15px;
-            padding-bottom: 10px;
+            justify-content: center;
         }
 
         .card {
             position: relative;
-            min-width: 150px;
+            width: 100%;
+            max-width: 180px;
+            height: 250px;
             background-color: #333;
             border-radius: 8px;
             overflow: hidden;
-            transition: transform 0.3s ease;
-        }
-
-        .card:hover {
-            transform: scale(1.1);
+            cursor: pointer;
+            transition: transform 0.3s ease-in-out;
         }
 
         .card img {
             width: 100%;
-            height: auto;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .card:hover {
+            transform: scale(1.1);
         }
 
         .card .overlay {
@@ -105,18 +106,72 @@
             background: rgba(0, 0, 0, 0.7);
             color: #fff;
             text-align: center;
-            padding: 5px;
+            padding: 8px;
             font-size: 14px;
+            font-weight: bold;
+        }
+
+        /* Add to List Button */
+        .card .add-to-list {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: all 0.3s ease-in-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .card .add-to-list::after {
+            content: "+";
+            transition: all 0.3s ease-in-out;
+        }
+
+        .card:hover .add-to-list {
+            padding: 5px 15px;
+        }
+
+        .card:hover .add-to-list::after {
+            content: "Add to List";
+        }
+
+        /* Hide Add to List after 3 seconds */
+        .card:hover .add-to-list.fade {
+            content: "+";
+        }
+
+        /* Added to List Notification */
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-size: 14px;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .notification.show {
+            opacity: 1;
         }
 
         /* Responsive Design */
         @media (max-width: 768px) {
             .navbar .nav-links {
                 display: none;
-            }
-
-            .navbar {
-                justify-content: space-between;
             }
         }
     </style>
@@ -130,82 +185,49 @@
             <li data-section="series">Series</li>
             <li data-section="movies">Movies</li>
             <li data-section="originals">Originals</li>
-            <li data-section="recently-added">Recently Added</li>
             <li data-section="my-list">My List</li>
         </ul>
-        <div class="profile">
-            <img src="https://via.placeholder.com/30" alt="Profile" />
-        </div>
     </nav>
+
+    <!-- Notification -->
+    <div class="notification" id="notification"></div>
 
     <!-- Sections -->
     <section class="section active" id="trending">
         <h2>Trending Now</h2>
         <div class="card-container">
             <div class="card">
-                <img src="./images/Breaking Bad.jpg" alt="Poster 1">
+                <img src="./images/Breaking Bad.jpg" alt="Breaking Bad">
                 <div class="overlay">Breaking Bad</div>
+                <div class="add-to-list"></div>
             </div>
             <div class="card">
-                <img src="./images/coolie.jpg" alt="Poster 2">
-                <div class="overlay">Coolie</div>
-            </div>
-            <div class="card">
-                <img src="./images/coolie.jpg" alt="Poster 3">
-                <div class="overlay">Coolie</div>
-            </div>
-            <div class="card">
-                <img src="./images/coolie.jpg" alt="Poster 4">
-                <div class="overlay">Coolie</div>
+                <img src="./images/DN.jpg" alt="Death Note">
+                <div class="overlay">Death Note</div>
+                <div class="add-to-list"></div>
             </div>
         </div>
     </section>
 
     <section class="section" id="series">
-        <h2>Watch It Again</h2>
+        <h2>Popular Series</h2>
         <div class="card-container">
             <div class="card">
-                <img src="./images/Breaking Bad.jpg" alt="Poster 5">
-                <div class="overlay">Breaking Bad</div>
-            </div>
-            <div class="card">
-                <img src="./images/coolie.jpg" alt="Poster 6">
-                <div class="overlay">Coolie</div>
-            </div>
-            <div class="card">
-                <img src="./images/coolie.jpg" alt="Poster 7">
-                <div class="overlay">Coolie</div>
-            </div>
-            <div class="card">
-                <img src="./images/coolie.jpg" alt="Poster 8">
-                <div class="overlay">Coolie</div>
+                <img src="./images/Stranger Things.jpg" alt="Stranger Things">
+                <div class="overlay">Stranger Things</div>
+                <div class="add-to-list"></div>
             </div>
         </div>
     </section>
 
-    <section class="section" id="movies">
-        <h2>Popular on Netflix</h2>
-        <div class="card-container">
-            <div class="card">
-                <img src="./images/Breaking Bad.jpg" alt="Poster 9">
-                <div class="overlay">Breaking Bad</div>
-            </div>
-            <div class="card">
-                <img src="./images/DN.jpg" alt="Poster 10">
-                <div class="overlay">Death Note</div>
-            </div>
-            <div class="card">
-                <img src="./images/Idli Kadai.jpg" alt="Poster 11">
-                <div class="overlay">Idli Kadai</div>
-            </div>
-            <div class="card">
-                <img src="./images/coolie.jpg" alt="Poster 12">
-                <div class="overlay">Coolie</div>
-            </div>
-        </div>
+    <!-- My List Section -->
+    <section class="section" id="my-list">
+        <h2>My List</h2>
+        <div class="card-container"></div>
     </section>
 
     <script>
+        // Switch Sections
         document.querySelectorAll('.nav-links li').forEach(item => {
             item.addEventListener('click', () => {
                 document.querySelectorAll('.section').forEach(section => {
@@ -214,6 +236,37 @@
                 document.getElementById(item.getAttribute('data-section')).classList.add('active');
             });
         });
+
+        // Add to List Functionality
+        document.querySelectorAll('.add-to-list').forEach(button => {
+            button.addEventListener('click', event => {
+                const card = event.target.closest('.card');
+                const myList = document.getElementById('my-list').querySelector('.card-container');
+                
+                // Prevent duplicates
+                if ([...myList.children].some(item => item.innerHTML === card.innerHTML)) {
+                    return;
+                }
+
+                // Clone and add to My List
+                const newCard = card.cloneNode(true);
+                newCard.querySelector('.add-to-list').remove();
+                myList.appendChild(newCard);
+
+                // Show notification
+                showNotification(`${card.querySelector('.overlay').innerText} added to My List`);
+            });
+        });
+
+        // Show Notification
+        function showNotification(message) {
+            const notification = document.getElementById('notification');
+            notification.innerText = message;
+            notification.classList.add('show');
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
     </script>
 </body>
 </html>
