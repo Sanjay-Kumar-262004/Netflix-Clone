@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="./images/netflix.png" type="image/png">
-    <title>Netflix Clone by Sanjay_Kumar_S26 - Content Page</title>
+    <title>Netflix Clone</title>
     <style>
         /* Global Styles */
         * {
@@ -17,7 +16,6 @@
             font-family: Arial, sans-serif;
             background-color: #141414;
             color: #fff;
-            overflow-x: hidden;
         }
 
         /* Navbar */
@@ -52,7 +50,38 @@
             color: #f40612;
         }
 
-        /* Section Styling */
+        /* Profile Section */
+        .profile {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .profile img {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+        }
+
+        .profile-dropdown {
+            display: none;
+            position: absolute;
+            right: 0;
+            background: #222;
+            padding: 10px;
+            border-radius: 5px;
+            width: 150px;
+        }
+
+        .profile:hover .profile-dropdown {
+            display: block;
+        }
+
+        .profile-dropdown p {
+            font-size: 14px;
+            margin: 5px 0;
+        }
+
+        /* Sections */
         .section {
             display: none;
             margin: 20px auto;
@@ -68,7 +97,7 @@
             font-size: 22px;
         }
 
-        /* Movie Card Styling */
+        /* Movie Rows */
         .card-container {
             display: flex;
             flex-wrap: wrap;
@@ -78,8 +107,7 @@
 
         .card {
             position: relative;
-            width: 100%;
-            max-width: 180px;
+            width: 180px;
             height: 250px;
             background-color: #333;
             border-radius: 8px;
@@ -111,8 +139,8 @@
             font-weight: bold;
         }
 
-        /* Add to List Button */
-        .card .add-to-list {
+        /* Add & Remove Button */
+        .card .add-to-list, .card .remove-from-list {
             position: absolute;
             top: 10px;
             right: 10px;
@@ -121,54 +149,47 @@
             padding: 5px 10px;
             border-radius: 20px;
             cursor: pointer;
-            font-size: 14px;
-            font-weight: bold;
-            transition: all 0.3s ease-in-out;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
         }
 
-        .card .add-to-list::after {
-            content: "+";
-            transition: all 0.3s ease-in-out;
+        .card:hover .add-to-list, .card:hover .remove-from-list {
+            opacity: 1;
         }
 
-        .card:hover .add-to-list {
-            padding: 5px 15px;
-        }
-
-        .card:hover .add-to-list::after {
-            content: "Add to List";
-        }
-
-        /* Hide Add to List after 3 seconds */
-        .card:hover .add-to-list.fade {
-            content: "+";
-        }
-
-        /* Added to List Notification */
-        .notification {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(0, 0, 0, 0.8);
-            color: white;
-            padding: 10px 15px;
-            border-radius: 5px;
-            font-size: 14px;
+        .card .add-to-list::after, .card .remove-from-list::after {
+            content: ' Add to List';
             opacity: 0;
             transition: opacity 0.5s ease-in-out;
         }
 
-        .notification.show {
+        .card:hover .add-to-list::after {
             opacity: 1;
         }
 
-        /* Responsive Design */
+        .card .remove-from-list::after {
+            content: ' Remove from List';
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .card:hover .remove-from-list::after {
+            opacity: 1;
+        }
+
+        /* Notification */
+        .notification {
+            position: fixed;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #f40612;
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            display: none;
+        }
+
         @media (max-width: 768px) {
             .navbar .nav-links {
                 display: none;
@@ -181,410 +202,42 @@
     <nav class="navbar">
         <div class="logo">NETFLIX</div>
         <ul class="nav-links">
-            <li data-section="trending">Home</li>
-            <li data-section="series">Series</li>
+            <li data-section="home">Home</li>
             <li data-section="movies">Movies</li>
-            <li data-section="originals">Originals</li>
+            <li data-section="series">Series</li>
+            <li data-section="originals">Netflix Originals</li>
             <li data-section="my-list">My List</li>
         </ul>
+        <div class="profile">
+            <img src="./images/man.png" alt="Profile" />
+            <div class="profile-dropdown">
+                <p>Username: User123</p>
+                <p>Email: user@example.com</p>
+            </div>
+        </div>
     </nav>
 
     <!-- Notification -->
     <div class="notification" id="notification"></div>
 
     <!-- Sections -->
-    <section class="section active" id="trending">
+    <section class="section active" id="home">
         <h2>Trending Now</h2>
         <div class="card-container">
             <div class="card">
-                <img src="./images/Breaking Bad.jpg" alt="Breaking Bad">
-                <div class="overlay">Breaking Bad</div>
-                <div class="add-to-list"></div>
-            </div>
-            <div class="card">
-                <img src="./images/DN.jpg" alt="Death Note">
-                <div class="overlay">Death Note</div>
-                <div class="add-to-list"></div>
-            </div>
-            <div class="card">
-                <img src="./images/DN.jpg" alt="Death Note">
-                <div class="overlay">Death Note</div>
-                <div class="add-to-list"></div>
-            </div>
-            <div class="card">
-                <img src="./images/DN.jpg" alt="Death Note">
-                <div class="overlay">Death Note</div>
-                <div class="add-to-list"></div>
-            </div>
-            <div class="card">
-                <img src="./images/DN.jpg" alt="Death Note">
-                <div class="overlay">Death Note</div>
-                <div class="add-to-list"></div>
-            </div>
-            <div class="card">
-                <img src="./images/DN.jpg" alt="Death Note">
-                <div class="overlay">Death Note</div>
-                <div class="add-to-list"></div>
-            </div>
-            <div class="card">
-                <img src="./images/DN.jpg" alt="Death Note">
-                <div class="overlay">Death Note</div>
-                <div class="add-to-list"></div>
-            </div>
-            <div class="card">
-                <img src="./images/DN.jpg" alt="Death Note">
-                <div class="overlay">Death Note</div>
-                <div class="add-to-list"></div>
-            </div>
-            <div class="card">
-                <img src="./images/DN.jpg" alt="Death Note">
-                <div class="overlay">Death Note</div>
-                <div class="add-to-list"></div>
-            </div>
-            <div class="card">
-                <img src="./images/DN.jpg" alt="Death Note">
-                <div class="overlay">Death Note</div>
-                <div class="add-to-list"></div>
-            </div>
-            <div class="card">
-                <img src="./images/DN.jpg" alt="Death Note">
-                <div class="overlay">Death Note</div>
-                <div class="add-to-list"></div>
-            </div>
-            <div class="card">
-                <img src="./images/DN.jpg" alt="Death Note">
-                <div class="overlay">Death Note</div>
-                <div class="add-to-list"></div>
-            </div>
-            <div class="card">
-                <img src="./images/DN.jpg" alt="Death Note">
-                <div class="overlay">Death Note</div>
-                <div class="add-to-list"></div>
-            </div>
-            <div class="card">
-                <img src="./images/DN.jpg" alt="Death Note">
-                <div class="overlay">Death Note</div>
-                <div class="add-to-list"></div>
-            </div>
-            <div class="card">
-                <img src="./images/DN.jpg" alt="Death Note">
-                <div class="overlay">Death Note</div>
-                <div class="add-to-list"></div>
-            </div>
-            <div class="card">
-                <img src="./images/DN.jpg" alt="Death Note">
-                <div class="overlay">Death Note</div>
-                <div class="add-to-list"></div>
-            </div>
-            <div class="card">
-                <img src="./images/DN.jpg" alt="Death Note">
-                <div class="overlay">Death Note</div>
-                <div class="add-to-list"></div>
-            </div>
-            <div class="card">
-                <img src="./images/DN.jpg" alt="Death Note">
-                <div class="overlay">Death Note</div>
-                <div class="add-to-list"></div>
+                <img src="./images/movie1.jpg" alt="Movie 1">
+                <div class="overlay">Movie 1</div>
+                <div class="add-to-list">+</div>
             </div>
         </div>
     </section>
 
-    <section class="section" id="movies">
-        <h2>Movies</h2>
-        <div class="card-container">
-            <div class="card">
-                <img src="./images/Stranger Things.jpg" alt="Stranger Things">
-                <div class="overlay">Stranger Things</div>
-                <div class="add-to-list"></div>
-            </div>
-            <div class="card">
-                <img src="./images/DN.jpg" alt="Death Note">
-                <div class="overlay">Death Note</div>
-                <div class="add-to-list"></div>
-            </div>
-            <div class="card">
-                <img src="./images/DN.jpg" alt="Death Note">
-                <div class="overlay">Death Note</div>
-                <div class="add-to-list"></div>
-            </div>
-            <div class="card">
-                <img src="./images/DN.jpg" alt="Death Note">
-                <div class="overlay">Death Note</div>
-                <div class="add-to-list"></div>
-            </div>
-            <div class="card">
-                <img src="./images/DN.jpg" alt="Death Note">
-                <div class="overlay">Death Note</div>
-                <div class="add-to-list"></div>
-            </div>
-            <div class="card">
-                <img src="./images/DN.jpg" alt="Death Note">
-                <div class="overlay">Death Note</div>
-                <div class="add-to-list"></div>
-            </div>
-            <div class="card">
-                <img src="./images/DN.jpg" alt="Death Note">
-                <div class="overlay">Death Note</div>
-                <div class="add-to-list"></div>
-            </div>
-            <div class="card">
-                <img src="./images/DN.jpg" alt="Death Note">
-                <div class="overlay">Death Note</div>
-                <div class="add-to-list"></div>
-            </div>
-            <div class="card">
-                <img src="./images/DN.jpg" alt="Death Note">
-                <div class="overlay">Death Note</div>
-                <div class="add-to-list"></div>
-            </div>
-            <div class="card">
-                <img src="./images/DN.jpg" alt="Death Note">
-                <div class="overlay">Death Note</div>
-                <div class="add-to-list"></div>
-            </div>
-            <div class="card">
-                <img src="./images/DN.jpg" alt="Death Note">
-                <div class="overlay">Death Note</div>
-                <div class="add-to-list"></div>
-            </div>
-            <div class="card">
-                <img src="./images/DN.jpg" alt="Death Note">
-                <div class="overlay">Death Note</div>
-                <div class="add-to-list"></div>
-            </div>
-            <div class="card">
-                <img src="./images/DN.jpg" alt="Death Note">
-                <div class="overlay">Death Note</div>
-                <div class="add-to-list"></div>
-            </div>
-            <div class="card">
-                <img src="./images/DN.jpg" alt="Death Note">
-                <div class="overlay">Death Note</div>
-                <div class="add-to-list"></div>
-            </div>
-            <div class="card">
-                <img src="./images/DN.jpg" alt="Death Note">
-                <div class="overlay">Death Note</div>
-                <div class="add-to-list"></div>
-            </div>
-            <div class="card">
-                <img src="./images/DN.jpg" alt="Death Note">
-                <div class="overlay">Death Note</div>
-                <div class="add-to-list"></div>
-            </div>
-            <div class="card">
-                <img src="./images/DN.jpg" alt="Death Note">
-                <div class="overlay">Death Note</div>
-                <div class="add-to-list"></div>
-            </div>
-            <div class="card">
-                <img src="./images/DN.jpg" alt="Death Note">
-                <div class="overlay">Death Note</div>
-                <div class="add-to-list"></div>
-            </div>
-            
-        </div>
-    </section>
-    <section class="section" id="series">
-        <h2>Popular Series</h2>
-        <div class="card-container">
-            <div class="card">
-                <img src="./images/Stranger Things.jpg" alt="Stranger Things">
-                <div class="overlay">Stranger Things</div>
-                <div class="add-to-list"></div>
-            </div>
-            <div class="card">
-                <img src="./images/DN.jpg" alt="Death Note">
-                <div class="overlay">Death Note</div>
-                <div class="add-to-list"></div>
-            </div>
-            <div class="card">
-                <img src="./images/DN.jpg" alt="Death Note">
-                <div class="overlay">Death Note</div>
-                <div class="add-to-list"></div>
-            </div>
-            <div class="card">
-                <img src="./images/DN.jpg" alt="Death Note">
-                <div class="overlay">Death Note</div>
-                <div class="add-to-list"></div>
-            </div>
-            <div class="card">
-                <img src="./images/DN.jpg" alt="Death Note">
-                <div class="overlay">Death Note</div>
-                <div class="add-to-list"></div>
-            </div>
-            <div class="card">
-                <img src="./images/DN.jpg" alt="Death Note">
-                <div class="overlay">Death Note</div>
-                <div class="add-to-list"></div>
-            </div>
-            <div class="card">
-                <img src="./images/DN.jpg" alt="Death Note">
-                <div class="overlay">Death Note</div>
-                <div class="add-to-list"></div>
-            </div>
-            <div class="card">
-                <img src="./images/DN.jpg" alt="Death Note">
-                <div class="overlay">Death Note</div>
-                <div class="add-to-list"></div>
-            </div>
-            <div class="card">
-                <img src="./images/DN.jpg" alt="Death Note">
-                <div class="overlay">Death Note</div>
-                <div class="add-to-list"></div>
-            </div>
-            <div class="card">
-                <img src="./images/DN.jpg" alt="Death Note">
-                <div class="overlay">Death Note</div>
-                <div class="add-to-list"></div>
-            </div>
-            <div class="card">
-                <img src="./images/DN.jpg" alt="Death Note">
-                <div class="overlay">Death Note</div>
-                <div class="add-to-list"></div>
-            </div>
-            <div class="card">
-                <img src="./images/DN.jpg" alt="Death Note">
-                <div class="overlay">Death Note</div>
-                <div class="add-to-list"></div>
-            </div>
-            <div class="card">
-                <img src="./images/DN.jpg" alt="Death Note">
-                <div class="overlay">Death Note</div>
-                <div class="add-to-list"></div>
-            </div>
-            <div class="card">
-                <img src="./images/DN.jpg" alt="Death Note">
-                <div class="overlay">Death Note</div>
-                <div class="add-to-list"></div>
-            </div>
-            <div class="card">
-                <img src="./images/DN.jpg" alt="Death Note">
-                <div class="overlay">Death Note</div>
-                <div class="add-to-list"></div>
-            </div>
-            <div class="card">
-                <img src="./images/DN.jpg" alt="Death Note">
-                <div class="overlay">Death Note</div>
-                <div class="add-to-list"></div>
-            </div>
-            <div class="card">
-                <img src="./images/DN.jpg" alt="Death Note">
-                <div class="overlay">Death Note</div>
-                <div class="add-to-list"></div>
-            </div> 
-            <div class="card">
-                <img src="./images/DN.jpg" alt="Death Note">
-                <div class="overlay">Death Note</div>
-                <div class="add-to-list"></div>
-            </div>
-        </div>
-    </section>
-
-    <section class="section" id="originals">
-        <h2>Netflix Originals</h2>
-        <div class="card-container">
-            <div class="card">
-                <img src="./images/Stranger Things.jpg" alt="Stranger Things">
-                <div class="overlay">Stranger Things</div>
-                <div class="add-to-list"></div>
-            </div>
-            <div class="card">
-                <img src="./images/Stranger Things.jpg" alt="Stranger Things">
-                <div class="overlay">Stranger Things</div>
-                <div class="add-to-list"></div>
-            </div>
-            <div class="card">
-                <img src="./images/Stranger Things.jpg" alt="Stranger Things">
-                <div class="overlay">Stranger Things</div>
-                <div class="add-to-list"></div>
-            </div>
-            <div class="card">
-                <img src="./images/Stranger Things.jpg" alt="Stranger Things">
-                <div class="overlay">Stranger Things</div>
-                <div class="add-to-list"></div>
-            </div>
-            <div class="card">
-                <img src="./images/Stranger Things.jpg" alt="Stranger Things">
-                <div class="overlay">Stranger Things</div>
-                <div class="add-to-list"></div>
-            </div>
-            <div class="card">
-                <img src="./images/Stranger Things.jpg" alt="Stranger Things">
-                <div class="overlay">Stranger Things</div>
-                <div class="add-to-list"></div>
-            </div>
-            <div class="card">
-                <img src="./images/Stranger Things.jpg" alt="Stranger Things">
-                <div class="overlay">Stranger Things</div>
-                <div class="add-to-list"></div>
-            </div>
-            <div class="card">
-                <img src="./images/Stranger Things.jpg" alt="Stranger Things">
-                <div class="overlay">Stranger Things</div>
-                <div class="add-to-list"></div>
-            </div>
-            <div class="card">
-                <img src="./images/Stranger Things.jpg" alt="Stranger Things">
-                <div class="overlay">Stranger Things</div>
-                <div class="add-to-list"></div>
-            </div>
-            <div class="card">
-                <img src="./images/Stranger Things.jpg" alt="Stranger Things">
-                <div class="overlay">Stranger Things</div>
-                <div class="add-to-list"></div>
-            </div>
-            <div class="card">
-                <img src="./images/Stranger Things.jpg" alt="Stranger Things">
-                <div class="overlay">Stranger Things</div>
-                <div class="add-to-list"></div>
-            </div>
-            <div class="card">
-                <img src="./images/Stranger Things.jpg" alt="Stranger Things">
-                <div class="overlay">Stranger Things</div>
-                <div class="add-to-list"></div>
-            </div>
-            <div class="card">
-                <img src="./images/Stranger Things.jpg" alt="Stranger Things">
-                <div class="overlay">Stranger Things</div>
-                <div class="add-to-list"></div>
-            </div>
-            <div class="card">
-                <img src="./images/Stranger Things.jpg" alt="Stranger Things">
-                <div class="overlay">Stranger Things</div>
-                <div class="add-to-list"></div>
-            </div>
-            <div class="card">
-                <img src="./images/Stranger Things.jpg" alt="Stranger Things">
-                <div class="overlay">Stranger Things</div>
-                <div class="add-to-list"></div>
-            </div>
-            <div class="card">
-                <img src="./images/Stranger Things.jpg" alt="Stranger Things">
-                <div class="overlay">Stranger Things</div>
-                <div class="add-to-list"></div>
-            </div>
-            <div class="card">
-                <img src="./images/Stranger Things.jpg" alt="Stranger Things">
-                <div class="overlay">Stranger Things</div>
-                <div class="add-to-list"></div>
-            </div>
-            <div class="card">
-                <img src="./images/Stranger Things.jpg" alt="Stranger Things">
-                <div class="overlay">Stranger Things</div>
-                <div class="add-to-list"></div>
-            </div>
-            
-        </div>
-    </section>
-    <!-- My List Section -->
     <section class="section" id="my-list">
         <h2>My List</h2>
         <div class="card-container"></div>
     </section>
 
     <script>
-        // Switch Sections
         document.querySelectorAll('.nav-links li').forEach(item => {
             item.addEventListener('click', () => {
                 document.querySelectorAll('.section').forEach(section => {
@@ -594,36 +247,31 @@
             });
         });
 
-        // Add to List Functionality
-        document.querySelectorAll('.add-to-list').forEach(button => {
-            button.addEventListener('click', event => {
-                const card = event.target.closest('.card');
-                const myList = document.getElementById('my-list').querySelector('.card-container');
-                
-                // Prevent duplicates
-                if ([...myList.children].some(item => item.innerHTML === card.innerHTML)) {
-                    return;
-                }
-
-                // Clone and add to My List
-                const newCard = card.cloneNode(true);
-                newCard.querySelector('.add-to-list').remove();
-                myList.appendChild(newCard);
-
-                // Show notification
-                showNotification(`${card.querySelector('.overlay').innerText} added to My List`);
-            });
-        });
-
-        // Show Notification
         function showNotification(message) {
             const notification = document.getElementById('notification');
-            notification.innerText = message;
-            notification.classList.add('show');
+            notification.textContent = message;
+            notification.style.display = 'block';
             setTimeout(() => {
-                notification.classList.remove('show');
-            }, 3000);
+                notification.style.display = 'none';
+            }, 2000);
         }
+
+        document.querySelectorAll('.add-to-list').forEach(button => {
+            button.addEventListener('click', (event) => {
+                const card = event.target.closest('.card').cloneNode(true);
+                card.querySelector('.add-to-list').remove();
+                const removeBtn = document.createElement('div');
+                removeBtn.classList.add('remove-from-list');
+                removeBtn.textContent = "-";
+                removeBtn.onclick = () => {
+                    card.remove();
+                    showNotification("Removed from My List");
+                };
+                card.appendChild(removeBtn);
+                document.getElementById('my-list').querySelector('.card-container').appendChild(card);
+                showNotification("Added to My List");
+            });
+        });
     </script>
 </body>
 </html>
