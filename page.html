@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <title>Netflix Clone</title>
     <style>
         /* Global Styles */
@@ -199,17 +200,18 @@
         }
 
         /* Notification */
-        .notification {
-            position: fixed;
-            top: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #f40612;
-            color: #fff;
-            padding: 10px;
-            border-radius: 5px;
-            display: none;
-        }
+    .notification {
+        position: fixed;
+        top: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #f40612;
+        color: #fff;
+        padding: 10px;
+        border-radius: 5px;
+        display: none;
+        z-index: 1000; /* Ensure it stays on top */
+    }
 
         @media (max-width: 768px) {
             .navbar .nav-links {
